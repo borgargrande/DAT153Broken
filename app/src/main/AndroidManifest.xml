@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DAT153">
-        <activity android:name=".Dataset"></activity>
+        <activity android:name=".LeggTilBilde"></activity>
+        <activity android:name=".Spill" />
+        <activity android:name=".Dataset" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
