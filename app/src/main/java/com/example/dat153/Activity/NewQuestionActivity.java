@@ -1,10 +1,7 @@
 package com.example.dat153.Activity;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,7 +12,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.dat153.CustomClasses.Camera;
 import com.example.dat153.CustomClasses.Campus;
 import com.example.dat153.CustomClasses.Question;
 import com.example.dat153.Persistent.ImageSaver;
@@ -23,7 +19,6 @@ import com.example.dat153.Persistent.ObjectSaver;
 import com.example.dat153.R;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 public class NewQuestionActivity extends AppCompatActivity {
@@ -32,7 +27,7 @@ public class NewQuestionActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private static final String TAG = "NewQuestionActivity";
     private Question question = new Question(Campus.FØRDE, null);
-    private Camera camera;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +58,7 @@ public class NewQuestionActivity extends AppCompatActivity {
             }
         });
 
-        camera = new Camera(this, this);
+
         savebtn.setOnClickListener(v -> {
             Intent intent = new Intent();
             question.setCampus(campus[0]);
