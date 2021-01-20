@@ -4,84 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.NewQuestionActivity">
+    tools:context=".Activity.PlayActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="415dp"
-        android:layout_height="552dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="411dp"
+        android:layout_height="566dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="81dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/newquestionSaveBtn"
+        app:layout_constraintBottom_toTopOf="@+id/playBackBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/playScore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Velg campus"
-            android:textSize="24sp" />
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Score:"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/playImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <RadioGroup
-            android:id="@+id/selectedCampus"
+            android:id="@+id/radioGroupPlay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/radioButton6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="Førde" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButton7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sogndal" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/radioButton8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bergen" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/radioButton9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Stord" />
 
             <RadioButton
-                android:id="@+id/radioButton5"
+                android:id="@+id/radioButton10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Haugesund" />
 
-            <Button
-                android:id="@+id/newQuestionPhoto"
+            <RadioButton
+                android:id="@+id/radioButton11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Velg bilete" />
-
-            <ImageView
-                android:id="@+id/newQuestionImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:text="42" />
         </RadioGroup>
-
     </LinearLayout>
 
     <Button
-        android:id="@+id/newquestionSaveBtn"
-        android:layout_width="match_parent"
+        android:id="@+id/playBackBtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:text="Lagre"
+        android:layout_marginBottom="20dp"
+        android:text="Attende"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,19 +8,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.dat153.CustomClasses.Question;
+import com.example.dat153.SharedClasses.Question;
 import com.example.dat153.R;
 
 import java.util.List;
 
 public class DatabaseAdapter extends RecyclerView.Adapter<DatabaseAdapter.ViewHolder> {
 
-    private List<Question> persons;
+    private List<Question> questions;
     private Context context;
 
-    public DatabaseAdapter(List<Question> persons) {
+    public DatabaseAdapter(List<Question> questions) {
 
-        this.persons = persons;
+        this.questions = questions;
 
     }
 
@@ -35,9 +35,9 @@ public class DatabaseAdapter extends RecyclerView.Adapter<DatabaseAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull DatabaseAdapter.ViewHolder holder, int position) {
-        holder.campus.setText(persons.get(position).getCampus().toString());
+        holder.campus.setText(questions.get(position).getCampus().toString());
 
-        Runnable imageLoader = () -> holder.imageView.post(() -> holder.imageView.setImageBitmap(persons.get(position).loadImage(context)));
+        Runnable imageLoader = () -> holder.imageView.post(() -> holder.imageView.setImageBitmap(questions.get(position).getImage()));
 
         Thread imageThread = new Thread(imageLoader);
 
@@ -47,7 +47,7 @@ public class DatabaseAdapter extends RecyclerView.Adapter<DatabaseAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return persons.size();
+        return questions.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

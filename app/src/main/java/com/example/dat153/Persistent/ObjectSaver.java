@@ -3,8 +3,8 @@ package com.example.dat153.Persistent;
 
 import android.content.Context;
 
-import com.example.dat153.CustomClasses.Question;
-import com.example.dat153.CustomClasses.Questions;
+import com.example.dat153.SharedClasses.Question;
+import com.example.dat153.SharedClasses.Questions;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -17,7 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 
-
+/*
 public class ObjectSaver implements Serializable {
 
     Context context;
@@ -128,3 +128,6 @@ public class ObjectSaver implements Serializable {
     }
 
 }
+
+
+ */

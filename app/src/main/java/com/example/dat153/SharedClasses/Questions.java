@@ -1,9 +1,8 @@
-package com.example.dat153.CustomClasses;
+package com.example.dat153.SharedClasses;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Questions implements Serializable {
+public class Questions  {
 
     private ArrayList<Question> list;
 

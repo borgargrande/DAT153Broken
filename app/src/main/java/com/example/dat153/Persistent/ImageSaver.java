@@ -14,7 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-
+/*
 public class ImageSaver {
     private String directoryName = "images";
     private String fileName = "image.png";
@@ -97,3 +97,5 @@ public class ImageSaver {
     }
 
 }
+
+*/

@@ -1,18 +1,15 @@
-package com.example.dat153.CustomClasses;
+package com.example.dat153.SharedClasses;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.example.dat153.Persistent.ImageSaver;
 
-import java.io.Serializable;
 import java.util.UUID;
 
-public class Question implements Serializable {
+public class Question  {
     private Campus campus;
     private String imageName;
     private String ID;
-    private transient Bitmap image;
+    private Bitmap image;
 
 
     public Question(Campus campus, Bitmap image) {
@@ -43,12 +40,7 @@ public class Question implements Serializable {
         return ID;
     }
 
-    public Bitmap loadImage(Context context) {
-        if (this.image == null){
-            this.image = new ImageSaver(context).setFileName(ID).setDirectoryName("images").load();
-        }
-        return image;
-    }
+
 
     public Bitmap getImage() {
         return image;
