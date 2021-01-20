@@ -6,11 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".LeggTilBilde">
 
-    <TextView
-        android:id="@+id/textViewleggtilbilde"
+    <Button
+        android:id="@+id/buttonfinnbilde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ditt bilde"
-        tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="111dp" />
+        android:text="finn et bilde"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/addedImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Navn på bilde ..."
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addedImage" />
+
+    <Button
+        android:id="@+id/buttonLagre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lagre"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonfinnbilde" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

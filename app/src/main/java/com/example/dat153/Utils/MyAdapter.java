@@ -85,7 +85,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.myText1.setText(allGameObjects.get(position).getName());
-        holder.mCardImage.setImageResource(allGameObjects.get(position).getImage());
+        holder.mCardImage.setImageBitmap(allGameObjects.get(position).getImage());
     }
 
     @Override

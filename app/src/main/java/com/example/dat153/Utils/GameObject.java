@@ -1,10 +1,12 @@
 package com.example.dat153.Utils;
 
+import android.graphics.Bitmap;
+
 public class GameObject {
     private String name;
-    private int image;
+    private Bitmap image;
 
-    public GameObject(String name, int image) {
+    public GameObject(String name, Bitmap image) {
         this.name = name;
         this.image = image;
     }
@@ -17,11 +19,11 @@ public class GameObject {
         this.name = name;
     }
 
-    public int getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 }
