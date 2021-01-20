@@ -9,10 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.example.dat153.Adapter.DatabaseAdapter;
 import com.example.dat153.R;
+import com.example.dat153.SharedClasses.Campus;
+import com.example.dat153.SharedClasses.Question;
 import com.example.dat153.SharedClasses.SharedObject;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -47,6 +51,38 @@ public class DatabaseActivity extends AppCompatActivity {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        Button fixDatabase = findViewById(R.id.fixDatabase);
+        fixDatabase.setOnClickListener(v -> {
+
+            Question q1 = new Question(Campus.FØRDE, BitmapFactory.decodeResource(getResources(), R.drawable.vie_kantine));
+            Question q2 = new Question(Campus.BERGEN, BitmapFactory.decodeResource(getResources(), R.drawable.bergen1));
+            Question q3 = new Question(Campus.BERGEN, BitmapFactory.decodeResource(getResources(), R.drawable.bergen2));
+            Question q4 = new Question(Campus.STORD, BitmapFactory.decodeResource(getResources(), R.drawable.stord1));
+            Question q5 = new Question(Campus.HAUGESUND, BitmapFactory.decodeResource(getResources(), R.drawable.haugesund1));
+            Question q6 = new Question(Campus.SOGNDAL, BitmapFactory.decodeResource(getResources(), R.drawable.sogndal1));
+
+            Question q7 = new Question(Campus.HAUGESUND, BitmapFactory.decodeResource(getResources(), R.drawable.haugesund2));
+            Question q8 = new Question(Campus.SOGNDAL, BitmapFactory.decodeResource(getResources(), R.drawable.sogndal2));
+            Question q9 = new Question(Campus.BERGEN, BitmapFactory.decodeResource(getResources(), R.drawable.bergen3));
+            Question q10 = new Question(Campus.FØRDE, BitmapFactory.decodeResource(getResources(), R.drawable.vie2));
+            Question q11 = new Question(Campus.SOGNDAL, BitmapFactory.decodeResource(getResources(), R.drawable.sogndal3));
+
+
+            sharedObject.getQuestions().addQuestion(q1);
+            sharedObject.getQuestions().addQuestion(q2);
+            sharedObject.getQuestions().addQuestion(q3);
+            sharedObject.getQuestions().addQuestion(q4);
+            sharedObject.getQuestions().addQuestion(q5);
+            sharedObject.getQuestions().addQuestion(q6);
+            sharedObject.getQuestions().addQuestion(q7);
+            sharedObject.getQuestions().addQuestion(q8);
+            sharedObject.getQuestions().addQuestion(q9);
+            sharedObject.getQuestions().addQuestion(q10);
+            sharedObject.getQuestions().addQuestion(q11);
+
+            adapter.notifyDataSetChanged();
+        });
 
     }
 
