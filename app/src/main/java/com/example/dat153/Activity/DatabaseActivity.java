@@ -62,7 +62,7 @@ public class DatabaseActivity extends AppCompatActivity {
         // setup the cheat-button for populating the database if you're lazy. Used many many times.
         Button fixDatabase = findViewById(R.id.fixDatabase);
         fixDatabase.setOnClickListener(v -> {
-
+            fixDatabase.setClickable(false);
             Question q1 = new Question(Campus.FØRDE, BitmapFactory.decodeResource(getResources(), R.drawable.vie_kantine));
             Question q2 = new Question(Campus.BERGEN, BitmapFactory.decodeResource(getResources(), R.drawable.bergen1));
             Question q3 = new Question(Campus.BERGEN, BitmapFactory.decodeResource(getResources(), R.drawable.bergen2));
