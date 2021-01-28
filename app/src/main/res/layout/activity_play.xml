@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="411dp"
         android:layout_height="566dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="81dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/playBackBtn"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="Score:"
+            android:text="@string/score"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -32,49 +32,49 @@
             android:id="@+id/playImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:contentDescription="@string/kva_campus_er_dette"
             tools:srcCompat="@tools:sample/avatars" />
 
         <RadioGroup
             android:id="@+id/radioGroupPlay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/radioButton6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Førde" />
+                android:text="@string/f_rde" />
 
             <RadioButton
                 android:id="@+id/radioButton7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sogndal" />
+                android:text="@string/sogndal" />
 
             <RadioButton
                 android:id="@+id/radioButton8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bergen" />
+                android:text="@string/bergen" />
 
             <RadioButton
                 android:id="@+id/radioButton9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Stord" />
+                android:text="@string/stord" />
 
             <RadioButton
                 android:id="@+id/radioButton10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Haugesund" />
+                android:text="@string/haugesund" />
 
             <RadioButton
                 android:id="@+id/radioButton11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="42" />
+                android:text="@string/_42" />
         </RadioGroup>
     </LinearLayout>
 
@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Attende"
+        android:text="@string/attende"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

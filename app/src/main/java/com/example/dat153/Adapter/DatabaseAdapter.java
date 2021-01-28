@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.dat153.SharedClasses.Question;
 import com.example.dat153.R;
 
@@ -29,20 +31,13 @@ public class DatabaseAdapter extends RecyclerView.Adapter<DatabaseAdapter.ViewHo
     public DatabaseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dataset_view, parent, false);
         this.context = parent.getContext();
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DatabaseAdapter.ViewHolder holder, int position) {
         holder.campus.setText(questions.get(position).getCampus().toString());
-
-        Runnable imageLoader = () -> holder.imageView.post(() -> holder.imageView.setImageBitmap(questions.get(position).getImage()));
-
-        Thread imageThread = new Thread(imageLoader);
-
-        imageThread.start();
-
+        holder.imageView.setImageBitmap(questions.get(position).getImage());
     }
 
     @Override

@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -25,7 +24,6 @@ import java.io.InputStream;
 
 public class NewQuestionActivity extends AppCompatActivity {
 
-    private static final String TAG = "NewQuestionActivity";
     private final Question question = new Question(Campus.FØRDE, null);
     private SharedObject sharedObject;
     private ImageView image;
@@ -34,16 +32,26 @@ public class NewQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_question);
-        Button savebtn = findViewById(R.id.newquestionSaveBtn);
-        RadioGroup radioGroup = findViewById(R.id.selectedCampus);
-        image = findViewById(R.id.newQuestionImage);
 
+        image = findViewById(R.id.newQuestionImage);
         sharedObject = (SharedObject) getApplicationContext();
 
+        Button saveButton = findViewById(R.id.newquestionSaveBtn);
+        saveButton.setOnClickListener(v -> {
+            if (question.getImage() == null) {
+                showToast("Velg bilete");
+            } else {
+                sharedObject.addQuestion(question);
+                setResult(1);
+                finish();
+            }
+        });
 
+
+        RadioGroup radioGroup = findViewById(R.id.selectedCampus);
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId != -1) {
-                RadioButton rb = (RadioButton) findViewById(checkedId);
+                RadioButton rb = findViewById(checkedId);
                 if (rb != null) {
                     CharSequence text = rb.getText();
                     if ("Førde".contentEquals(text)) {
@@ -62,26 +70,19 @@ public class NewQuestionActivity extends AppCompatActivity {
         });
 
 
-        savebtn.setOnClickListener(v -> {
-            if (question.getImage() == null){
-                showToast("Velg bilete");
-            }else {
-                sharedObject.getQuestions().addQuestion(question);
-                setResult(1);
-                finish();
-            }
-
-        });
 
         Button newPhoto = findViewById(R.id.newQuestionPhoto);
         newPhoto.setOnClickListener(v -> {
 
 
+            // Choose from camera roll
             Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
             startActivityForResult(gallery, 1);
 
 
+
 /*
+            // Show camera and take a picture. Not in use
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
                 this.startActivityForResult(takePictureIntent, 2);
@@ -90,13 +91,24 @@ public class NewQuestionActivity extends AppCompatActivity {
         });
     }
 
-    private void showToast(String message){
+    /**
+     * @param message to be shown for the user in the Toast.
+     */
+    private void showToast(String message) {
         Toast.makeText(this, message,
                 Toast.LENGTH_LONG).show();
     }
+
+    /**
+     *
+     * @param requestCode The requestcode that was added to startActivityForResult
+     * @param resultCode the resultcode that is set from the other activity with setResult(**)
+     * @param data intent-data from the other activity
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // Handling the cameraroll
         if (resultCode == RESULT_OK && requestCode == 1) {
             try {
                 final Uri imageUri = data.getData();
@@ -110,17 +122,18 @@ public class NewQuestionActivity extends AppCompatActivity {
 
         }
 
-
+        // Handling the camera. Not in use
         if (resultCode == RESULT_OK && requestCode == 2) {
-
-
             Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
             question.setImage(scaledBM(selectedImage));
-
         }
         image.setImageBitmap(question.getImage());
     }
 
+    /**
+     * @param bm to be scaled.
+     * @return scaled bitmap with width and/or height of max 500
+     */
     public Bitmap scaledBM(Bitmap bm) {
 
         int width = bm.getWidth();

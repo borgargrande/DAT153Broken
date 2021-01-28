@@ -1,6 +1,25 @@
 <resources>
     <string name="app_name">DAT153</string>
     <string name="Save">Lagre</string>
+    <string name="EmptyQuiz">Tomt for spørsmål</string>
+    <string name="EmptyQuizMsg">Det er ikkje nokon spørsmål i databasen. Velg database og legg til spørsmål.</string>
+    <string name="score">Score:</string>
+    <string name="f_rde">Førde</string>
+    <string name="sogndal">Sogndal</string>
+    <string name="bergen">Bergen</string>
+    <string name="stord">Stord</string>
+    <string name="haugesund">Haugesund</string>
+    <string name="_42">42</string>
+    <string name="attende">Attende</string>
+    <string name="velg_bilete">Velg bilete</string>
+    <string name="lagre">Lagre</string>
+    <string name="velg_campus">Velg campus</string>
+    <string name="database">Database</string>
+    <string name="spel">Spel</string>
+    <string name="let_me_fix_this">Jukseknapp</string>
+    <string name="add_question">Legg til spørsmål</string>
+    <string name="kva_campus_er_dette">Kva campus er dette?</string>
+    <string name="quizIsDone">Quizen er ferdig.</string>
 
 
 </resources>

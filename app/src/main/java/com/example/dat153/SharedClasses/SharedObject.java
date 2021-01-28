@@ -2,12 +2,21 @@ package com.example.dat153.SharedClasses;
 
 import android.app.Application;
 
+import java.util.ArrayList;
+
 
 public class SharedObject extends Application {
-    private Questions questions = new Questions();
+    private ArrayList<Question> questions;
 
-    public Questions getQuestions() {
+    public SharedObject() {
+        this.questions = new ArrayList<>();
+    }
+
+    public ArrayList<Question> getQuestions() {
         return questions;
     }
 
+    public void addQuestion(Question question) {
+        this.questions.add(question);
+    }
 }

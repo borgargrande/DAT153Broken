@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="Database" />
+            android:text="@string/database" />
 
         <Button
             android:id="@+id/btnplay"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:text="Spel" />
+            android:text="@string/spel" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

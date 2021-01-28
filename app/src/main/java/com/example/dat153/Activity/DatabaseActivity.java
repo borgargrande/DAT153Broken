@@ -30,6 +30,7 @@ public class DatabaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_database);
 
         sharedObject = (SharedObject) getApplicationContext();
@@ -37,7 +38,9 @@ public class DatabaseActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.personTable);
         newQuestionButton = findViewById(R.id.newQuestionButton);
 
-        adapter = new DatabaseAdapter(sharedObject.getQuestions().getList());
+        // Create recycleView-adapter and send the questions as input.
+        adapter = new DatabaseAdapter(sharedObject.getQuestions());
+
         newQuestionButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, NewQuestionActivity.class);
             startActivityForResult(intent, 1);
@@ -52,6 +55,11 @@ public class DatabaseActivity extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
+        // Back button and finish activity on click
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
+
+        // setup the cheat-button for populating the database if you're lazy. Used many many times.
         Button fixDatabase = findViewById(R.id.fixDatabase);
         fixDatabase.setOnClickListener(v -> {
 
@@ -69,18 +77,20 @@ public class DatabaseActivity extends AppCompatActivity {
             Question q11 = new Question(Campus.SOGNDAL, BitmapFactory.decodeResource(getResources(), R.drawable.sogndal3));
 
 
-            sharedObject.getQuestions().addQuestion(q1);
-            sharedObject.getQuestions().addQuestion(q2);
-            sharedObject.getQuestions().addQuestion(q3);
-            sharedObject.getQuestions().addQuestion(q4);
-            sharedObject.getQuestions().addQuestion(q5);
-            sharedObject.getQuestions().addQuestion(q6);
-            sharedObject.getQuestions().addQuestion(q7);
-            sharedObject.getQuestions().addQuestion(q8);
-            sharedObject.getQuestions().addQuestion(q9);
-            sharedObject.getQuestions().addQuestion(q10);
-            sharedObject.getQuestions().addQuestion(q11);
+            sharedObject.addQuestion(q1);
+            sharedObject.addQuestion(q2);
+            sharedObject.addQuestion(q3);
+            sharedObject.addQuestion(q4);
+            sharedObject.addQuestion(q5);
+            sharedObject.addQuestion(q6);
+            sharedObject.addQuestion(q7);
+            sharedObject.addQuestion(q8);
+            sharedObject.addQuestion(q9);
+            sharedObject.addQuestion(q10);
+            sharedObject.addQuestion(q11);
 
+
+            // Notify adapter that dataset has changed
             adapter.notifyDataSetChanged();
         });
 
@@ -89,7 +99,7 @@ public class DatabaseActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == resultCode){
+        if (requestCode == resultCode) {
             adapter.notifyDataSetChanged();
         }
     }
@@ -101,7 +111,7 @@ public class DatabaseActivity extends AppCompatActivity {
         }
 
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            sharedObject.getQuestions().getList().remove(viewHolder.getAdapterPosition());
+            sharedObject.getQuestions().remove(viewHolder.getAdapterPosition());
             adapter.notifyDataSetChanged();
         }
     };

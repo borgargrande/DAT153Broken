@@ -21,7 +21,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Velg campus"
+            android:text="@string/velg_campus"
             android:textSize="24sp" />
 
         <RadioGroup
@@ -34,42 +34,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Førde" />
+                android:text="@string/f_rde" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sogndal" />
+                android:text="@string/sogndal" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bergen" />
+                android:text="@string/bergen" />
 
             <RadioButton
                 android:id="@+id/radioButton4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Stord" />
+                android:text="@string/stord" />
 
             <RadioButton
                 android:id="@+id/radioButton5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Haugesund" />
+                android:text="@string/stord" />
 
             <Button
                 android:id="@+id/newQuestionPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Velg bilete" />
+                android:text="@string/velg_bilete" />
 
             <ImageView
                 android:id="@+id/newQuestionImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/kva_campus_er_dette"
                 tools:srcCompat="@tools:sample/avatars" />
         </RadioGroup>
 
@@ -80,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:text="Lagre"
+        android:text="@string/lagre"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
