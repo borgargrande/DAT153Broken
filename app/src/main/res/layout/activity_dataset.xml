@@ -26,4 +26,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@drawable/ic_add_button" />
+
+    <TextView
+        android:id="@+id/noObjectsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trykk på plusstegnet for å legge til bilder."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ImagesRecyclerView"
+        app:layout_constraintVertical_bias="0.403" />
 </androidx.constraintlayout.widget.ConstraintLayout>

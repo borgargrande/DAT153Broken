@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.dat153.Utils.GameObject;
 import com.example.dat153.Utils.MyAdapter;
@@ -23,6 +24,8 @@ public class Dataset extends AppCompatActivity {
     List<GameObject> allImages;
     FloatingActionButton goToAddImage;
     MyAdapter newAdapter;
+    TextView noObjectsText;
+    SharedObject sharedObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,12 @@ public class Dataset extends AppCompatActivity {
         setContentView(R.layout.activity_dataset);
         r = findViewById(R.id.ImagesRecyclerView);
         goToAddImage = findViewById(R.id.goToAddImageBtn);
-        SharedObject sharedObject = (SharedObject) getApplicationContext();
+        sharedObject = (SharedObject) getApplicationContext();
+        noObjectsText = findViewById(R.id.noObjectsText);
+
+        if (sharedObject.getAllObjectsShared().size() > 0){
+            noObjectsText.setVisibility(View.INVISIBLE);
+        }
 
       /*  GameObject one = new GameObject("Bilde 1", R.drawable.ic_testimage);
         GameObject two = new GameObject("Bilde 2", R.drawable.ic_testimage);
@@ -60,6 +68,9 @@ public class Dataset extends AppCompatActivity {
         newAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onDeleteClick(int position) {
+                if (sharedObject.getAllObjectsShared().size() < 1){
+                    noObjectsText.setVisibility(View.VISIBLE);
+                }
                 sharedObject.removeObject(position);
                 newAdapter.notifyItemRemoved(position);
             }
@@ -81,6 +92,9 @@ public class Dataset extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (sharedObject.getAllObjectsShared().size() > 0){
+            noObjectsText.setVisibility(View.INVISIBLE);
+        }
         newAdapter.notifyDataSetChanged();
     }
 }
