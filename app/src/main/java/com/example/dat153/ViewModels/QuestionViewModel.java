@@ -14,7 +14,6 @@ import java.util.List;
 
 public class QuestionViewModel extends AndroidViewModel implements QuestionDao {
 
-
     private QuestionRepository repository;
     private LiveData<List<Question>> allQuestions;
 
@@ -23,7 +22,6 @@ public class QuestionViewModel extends AndroidViewModel implements QuestionDao {
         repository = new QuestionRepository(application);
         allQuestions = repository.getAllQuestions();
     }
-
 
     @Override
     public void insert(Question question) {
@@ -50,8 +48,4 @@ public class QuestionViewModel extends AndroidViewModel implements QuestionDao {
         return repository.getAllQuestions();
     }
 
-    @Override
-    public Question getQuestion(int ID) {
-        return repository.getQuestion(ID);
-    }
 }

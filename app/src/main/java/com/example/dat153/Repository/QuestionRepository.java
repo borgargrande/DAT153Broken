@@ -54,10 +54,6 @@ public class QuestionRepository {
         thread.start();
     }
 
-    public Question getQuestion(int ID){
-        return questionDao.getQuestion(ID);
-    }
-
     public LiveData<List<Question>> getAllQuestions(){
         return allQuestions;
     }

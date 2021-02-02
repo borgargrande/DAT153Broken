@@ -29,8 +29,5 @@ public interface QuestionDao {
     @Query("SELECT * FROM question_table ORDER BY ID DESC")
     LiveData<List<Question>> getallQuestions();
 
-    @Query("SELECT * FROM question_table WHERE id = :ID")
-    Question getQuestion(int ID);
-
 
 }
