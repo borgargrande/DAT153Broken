@@ -1,35 +1,36 @@
 package com.example.dat153.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.dat153.Entity.Question;
 import com.example.dat153.R;
-import com.example.dat153.SharedClasses.Question;
-import com.example.dat153.SharedClasses.SharedObject;
+import com.example.dat153.ViewModels.QuestionViewModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 
 public class PlayActivity extends AppCompatActivity {
 
     private ImageView playImage;
-    private SharedObject sharedObject;
     private Question currentQuestion;
     private int score = 0;
     private TextView playScore;
-    private ArrayList<Question> currentQuiz;
+    private List<Question> currentQuiz;
+    private QuestionViewModel questionViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,8 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
 
         // Get sharedObject.
-        sharedObject = (SharedObject) getApplicationContext();
+        questionViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(QuestionViewModel.class);
+
 
         // Get and configure radiogroup.
         RadioGroup radioGroup = findViewById(R.id.radioGroupPlay);
@@ -53,46 +55,51 @@ public class PlayActivity extends AppCompatActivity {
         backBtn.setOnClickListener(v -> {
             finish();
         });
-        startQuiz();
+
+       // startQuiz();
+        setupQuiz();
 
     }
 
     /**
-     * Start the quiz with a random question.
+     * Setup the quiz with a random question.
      */
-    private void startQuiz() {
-        // Get random question and set bitmap
-        currentQuestion = getRandomQuestion();
-        playScore.setBackgroundColor(Color.WHITE);
-        score = 0;
-        playScore.setText("Score: " + score);
-        if (currentQuestion != null) {
-            playImage.setImageBitmap(currentQuestion.getImage());
-        }
+    private void setupQuiz(){
+        questionViewModel.getallQuestions().observe(this, questions -> {
+            currentQuiz = new ArrayList<>(questions);
+            Collections.shuffle(currentQuiz);
+            currentQuestion = currentQuiz.get(0);
+            playScore.setBackgroundColor(Color.WHITE);
+            score = 0;
+            playScore.setText("Score: " + score);
+            if (currentQuestion != null) {
+                playImage.setImageBitmap(currentQuestion.getImage());
+            }
+            currentQuiz.remove(0);
+        });
     }
+
 
     /**
      * @return a random question that is left in the current quiz.
      */
     private Question getRandomQuestion() {
-        if (currentQuiz == null) {
-            currentQuiz = new ArrayList<>(sharedObject.getQuestions());
-        }
-        Question question = null;
-        if (currentQuiz.size() > 1) {
-            Random random = new Random();
-            int nextQuestion = random.nextInt(currentQuiz.size() - 1);
-            question = currentQuiz.get(nextQuestion);
-            currentQuiz.remove(nextQuestion);
-        } else if (currentQuiz.size() == 1) {
-            question = currentQuiz.get(0);
-            currentQuiz.remove(0);
-        } else {
-            this.currentQuiz = null;
-            showAlertQuizIsDone();
-        }
 
-        return question;
+            Question question = null;
+            if (currentQuiz.size() > 1) {
+                Random random = new Random();
+                int nextQuestion = random.nextInt(currentQuiz.size() - 1);
+                question = currentQuiz.get(nextQuestion);
+                currentQuiz.remove(nextQuestion);
+            } else if (currentQuiz.size() == 1) {
+                question = currentQuiz.get(0);
+                currentQuiz.remove(0);
+            } else {
+                this.currentQuiz = null;
+                showAlertQuizIsDone();
+            }
+            return question;
+
     }
 
 
@@ -104,7 +111,7 @@ public class PlayActivity extends AppCompatActivity {
     private final RadioGroup.OnCheckedChangeListener radioListener = (group, checkedId) -> {
         RadioButton rb = findViewById(checkedId);
         rb.setChecked(false);
-        if (currentQuestion != null){
+        if (currentQuestion != null) {
             if (rb.getText().toString().toUpperCase().equals(currentQuestion.getCampus().toString())) {
                 score++;
                 playScore.setText("Score: " + score);
@@ -129,9 +136,9 @@ public class PlayActivity extends AppCompatActivity {
     private void showAlertQuizIsDone() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.quizIsDone)
-                .setMessage("Din score: " + score + " av " + sharedObject.getQuestions().size())
+                .setMessage("Din score: " + score + " av " + questionViewModel.getallQuestions().getValue().size())
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setNeutralButton("Reset", (dialog, which) -> startQuiz())
+                .setNeutralButton("Reset", (dialog, which) -> setupQuiz())
                 .setNegativeButton("OK", (dialog, which) -> finish())
                 .show();
     }

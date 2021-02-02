@@ -1,7 +1,5 @@
 package com.example.dat153.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,35 +12,36 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.dat153.SharedClasses.Campus;
-import com.example.dat153.SharedClasses.Question;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.dat153.Entity.Campus;
+import com.example.dat153.Entity.Question;
 import com.example.dat153.R;
-import com.example.dat153.SharedClasses.SharedObject;
+import com.example.dat153.ViewModels.QuestionViewModel;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class NewQuestionActivity extends AppCompatActivity {
 
-    private final Question question = new Question(Campus.FØRDE, null);
-    private SharedObject sharedObject;
+    private final Question question = new Question(Campus.FØRDE);
     private ImageView image;
-
+    private QuestionViewModel questionViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_question);
 
         image = findViewById(R.id.newQuestionImage);
-        sharedObject = (SharedObject) getApplicationContext();
+        questionViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(QuestionViewModel.class);
 
         Button saveButton = findViewById(R.id.newquestionSaveBtn);
         saveButton.setOnClickListener(v -> {
             if (question.getImage() == null) {
                 showToast("Velg bilete");
             } else {
-                sharedObject.addQuestion(question);
-                setResult(1);
+                questionViewModel.insert(question);
                 finish();
             }
         });

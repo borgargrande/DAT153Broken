@@ -2,9 +2,11 @@ package com.example.dat153.SharedClasses;
 
 import android.app.Application;
 
+import com.example.dat153.Entity.Question;
+
 import java.util.ArrayList;
 
-
+/*
 public class SharedObject extends Application {
     private ArrayList<Question> questions;
 
@@ -20,3 +22,4 @@ public class SharedObject extends Application {
         this.questions.add(question);
     }
 }
+*/

@@ -1,6 +1,5 @@
 package com.example.dat153.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,41 +7,47 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dat153.SharedClasses.Question;
+import com.example.dat153.Entity.Question;
 import com.example.dat153.R;
 
-import java.util.List;
+public class DatabaseAdapter extends ListAdapter<Question, DatabaseAdapter.ViewHolder> {
 
-public class DatabaseAdapter extends RecyclerView.Adapter<DatabaseAdapter.ViewHolder> {
+    public DatabaseAdapter() {
+        super(Diff_CALLBACK);
+    }
 
-    private List<Question> questions;
-    private Context context;
+    private static final DiffUtil.ItemCallback<Question> Diff_CALLBACK = new DiffUtil.ItemCallback<Question>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Question oldItem, @NonNull Question newItem) {
+            return oldItem.getID() == newItem.getID();
+        }
 
-    public DatabaseAdapter(List<Question> questions) {
+        @Override
+        public boolean areContentsTheSame(@NonNull Question oldItem, @NonNull Question newItem) {
+            return oldItem.getCampus().equals(newItem.getCampus());
+        }
+    };
 
-        this.questions = questions;
-
+    public Question getQuestionAt(int position) {
+        return getItem(position);
     }
 
     @NonNull
     @Override
     public DatabaseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dataset_view, parent, false);
-        this.context = parent.getContext();
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DatabaseAdapter.ViewHolder holder, int position) {
-        holder.campus.setText(questions.get(position).getCampus().toString());
-        holder.imageView.setImageBitmap(questions.get(position).getImage());
-    }
-
-    @Override
-    public int getItemCount() {
-        return questions.size();
+        Question currentQuestion = getItem(position);
+        holder.campus.setText(currentQuestion.getCampus().toString());
+        holder.imageView.setImageBitmap(currentQuestion.getImage());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -54,7 +59,5 @@ public class DatabaseAdapter extends RecyclerView.Adapter<DatabaseAdapter.ViewHo
             campus = itemView.findViewById(R.id.textView);
             imageView = itemView.findViewById(R.id.databaseQuestionImage);
         }
-
-
     }
 }
