@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -121,6 +122,7 @@ public class PlayActivity extends AppCompatActivity {
                 playScore.setBackgroundColor(Color.GREEN);
             } else {
                 playScore.setBackgroundColor(Color.RED);
+                Toast.makeText(this, "Rett svar er " + currentQuestion.getCampus().toString(), Toast.LENGTH_SHORT).show();
             }
             currentQuestion = getRandomQuestion();
             if (currentQuestion != null) {
