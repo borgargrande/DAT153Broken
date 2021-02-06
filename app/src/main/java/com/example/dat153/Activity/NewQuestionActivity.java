@@ -73,20 +73,20 @@ public class NewQuestionActivity extends AppCompatActivity {
         Button newPhoto = findViewById(R.id.newQuestionPhoto);
         newPhoto.setOnClickListener(v -> {
 
-
-            // Choose from camera roll
-            Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+/*
+            // Choose from camera roll. Not in use
+            Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(gallery, 1);
 
+*/
 
 
-/*
-            // Show camera and take a picture. Not in use
+            // Show camera and take a picture.
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
                 this.startActivityForResult(takePictureIntent, 2);
             }
-*/
+
         });
     }
 
@@ -107,13 +107,15 @@ public class NewQuestionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Handling the cameraroll
+        // Handling the cameraroll. Not in use
         if (resultCode == RESULT_OK && requestCode == 1) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = this.getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 question.setImage(scaledBM(selectedImage));
+
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
 
@@ -121,7 +123,7 @@ public class NewQuestionActivity extends AppCompatActivity {
 
         }
 
-        // Handling the camera. Not in use
+        // Handling the camera
         if (resultCode == RESULT_OK && requestCode == 2) {
             Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
             question.setImage(scaledBM(selectedImage));

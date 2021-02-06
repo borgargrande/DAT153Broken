@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dat153">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -13,9 +14,7 @@
         android:roundIcon="@drawable/hvl"
         android:supportsRtl="true"
         android:theme="@style/Theme.DAT153">
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+
         <activity android:name=".Activity.PlayActivity" />
         <activity android:name=".Activity.NewQuestionActivity" />
         <activity android:name=".Activity.DatabaseActivity" />

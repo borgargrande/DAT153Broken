@@ -144,4 +144,8 @@ public class PlayActivity extends AppCompatActivity {
                 .setNegativeButton("OK", (dialog, which) -> finish())
                 .show();
     }
+
+    public int getScore() {
+        return score;
+    }
 }
