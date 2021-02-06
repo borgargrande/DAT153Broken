@@ -120,6 +120,15 @@ public class DatabaseActivity extends AppCompatActivity {
 
     }
 
+
+    public DatabaseAdapter getAdapter() {
+        return adapter;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

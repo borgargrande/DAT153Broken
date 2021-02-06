@@ -98,6 +98,10 @@ public class NewQuestionActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
+    public QuestionViewModel getQuestionViewModel() {
+        return questionViewModel;
+    }
+
     /**
      *
      * @param requestCode The requestcode that was added to startActivityForResult
