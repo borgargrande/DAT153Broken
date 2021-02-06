@@ -80,6 +80,9 @@ public class PlayActivity extends AppCompatActivity {
         });
     }
 
+    public Question getCurrentQuestion() {
+        return currentQuestion;
+    }
 
     /**
      * @return a random question that is left in the current quiz.
