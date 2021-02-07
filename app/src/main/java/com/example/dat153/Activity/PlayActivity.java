@@ -57,7 +57,6 @@ public class PlayActivity extends AppCompatActivity {
             finish();
         });
 
-       // startQuiz();
         setupQuiz();
 
     }
@@ -67,8 +66,14 @@ public class PlayActivity extends AppCompatActivity {
      */
     private void setupQuiz(){
         questionViewModel.getallQuestions().observe(this, questions -> {
-            currentQuiz = new ArrayList<>(questions);
-            Collections.shuffle(currentQuiz);
+            setupQuiz(questions);
+        });
+    }
+
+    public void setupQuiz(List<Question> questions){
+        currentQuiz = new ArrayList<>(questions);
+        Collections.shuffle(currentQuiz);
+        if (currentQuiz.size() > 0){
             currentQuestion = currentQuiz.get(0);
             playScore.setBackgroundColor(Color.WHITE);
             score = 0;
@@ -77,7 +82,20 @@ public class PlayActivity extends AppCompatActivity {
                 playImage.setImageBitmap(currentQuestion.getImage());
             }
             currentQuiz.remove(0);
-        });
+        }
+
+    }
+
+    public void setCurrentQuestion(Question currentQuestion) {
+        this.currentQuestion = currentQuestion;
+    }
+
+    public ImageView getPlayImage() {
+        return playImage;
+    }
+
+    public List<Question> getCurrentQuiz() {
+        return currentQuiz;
     }
 
     public Question getCurrentQuestion() {
