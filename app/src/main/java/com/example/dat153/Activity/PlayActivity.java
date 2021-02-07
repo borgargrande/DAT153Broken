@@ -53,9 +53,7 @@ public class PlayActivity extends AppCompatActivity {
 
         // Get back-button and configure onclick to end current activity.
         Button backBtn = findViewById(R.id.playBackBtn);
-        backBtn.setOnClickListener(v -> {
-            finish();
-        });
+        backBtn.setOnClickListener(v -> finish());
 
         setupQuiz();
 
@@ -65,9 +63,7 @@ public class PlayActivity extends AppCompatActivity {
      * Setup the quiz with a random question.
      */
     private void setupQuiz(){
-        questionViewModel.getallQuestions().observe(this, questions -> {
-            setupQuiz(questions);
-        });
+        questionViewModel.getallQuestions().observe(this, this::setupQuiz);
     }
 
     public void setupQuiz(List<Question> questions){
@@ -84,14 +80,6 @@ public class PlayActivity extends AppCompatActivity {
             currentQuiz.remove(0);
         }
 
-    }
-
-    public void setCurrentQuestion(Question currentQuestion) {
-        this.currentQuestion = currentQuestion;
-    }
-
-    public ImageView getPlayImage() {
-        return playImage;
     }
 
     public List<Question> getCurrentQuiz() {

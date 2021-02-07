@@ -27,12 +27,12 @@ import static androidx.test.espresso.intent.Intents.intending;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class AddDeleteQuestionTest {
-    private static final String TAG = "NewQuestionActivityTest";
 
     @Rule
     public IntentsTestRule<DatabaseActivity> mActivityTestRule = new IntentsTestRule<>(DatabaseActivity.class);
@@ -48,7 +48,7 @@ public class AddDeleteQuestionTest {
 
 
     @Test
-    public void testAddQuestion() throws InterruptedException {
+    public void testAddQuestion() {
         int sizeBefore = mActivityTestRule.getActivity().getAdapter().getCurrentList().size();
 
         onView(withId(R.id.newQuestionButton)).perform(click());
@@ -66,8 +66,7 @@ public class AddDeleteQuestionTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click())).check(matches(isDisplayed()));
 
 
-
-        assertTrue(sizeBefore == mActivityTestRule.getActivity().getAdapter().getCurrentList().size());
+        assertEquals(sizeBefore, mActivityTestRule.getActivity().getAdapter().getCurrentList().size());
 
 
     }

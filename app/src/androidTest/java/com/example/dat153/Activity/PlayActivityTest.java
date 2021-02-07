@@ -3,7 +3,6 @@ package com.example.dat153.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -22,11 +21,8 @@ import java.util.List;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @LargeTest
@@ -83,7 +79,7 @@ public class PlayActivityTest {
         onView(withId(R.id.radioButton10)).perform(click());
 
 
-        assertTrue(mActivityTestRule.getActivity().getScore() == score);
+        assertEquals(mActivityTestRule.getActivity().getScore(), score);
 
 
     }
