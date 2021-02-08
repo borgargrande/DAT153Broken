@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         buttonspill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goToSpill = new Intent(MainActivity.this, Spill.class);
+                Intent goToSpill = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(goToSpill);
             }
         });
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         buttondataset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goToDataset = new Intent(MainActivity.this, Dataset.class);
+                Intent goToDataset = new Intent(MainActivity.this, DatasetActivity.class);
                 startActivity(goToDataset);
             }
         });

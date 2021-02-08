@@ -2,10 +2,10 @@ package com.example.dat153;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -14,20 +14,23 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.example.dat153.Utils.GameObject;
-import com.example.dat153.Utils.SharedObject;
+import com.example.dat153.Utils.Picture;
+import com.example.dat153.Utils.PictureViewModel;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class LeggTilBilde extends AppCompatActivity {
+public class AddPicActivity extends AppCompatActivity {
 
 
     Bitmap imageBitmap;
     ImageView addedImage;
+    PictureViewModel pictureViewModel;
+
 
     private String selectedImagePath;
     Button lagreButton;
@@ -39,16 +42,15 @@ public class LeggTilBilde extends AppCompatActivity {
         addedImage = findViewById(R.id.addedImage);
         lagreButton = findViewById(R.id.buttonLagre);
         bildeNavn = findViewById(R.id.nameEditText);
-        SharedObject sharedObject = (SharedObject) getApplicationContext();
+       // Picture picture = new Picture("test3", "");
 
+        pictureViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(PictureViewModel.class);
         lagreButton.setOnClickListener(view -> {
 
-            if(!(bildeNavn.getText().toString() == "")) {
-                sharedObject.addObject(new GameObject(bildeNavn.getText().toString(), imageBitmap));
-                finish();
+            saveGameObject();
 
-            }
-        });
+            });
+
 
         findViewById(R.id.buttonfinnbilde)
                 .setOnClickListener(new View.OnClickListener() {
@@ -71,11 +73,36 @@ public class LeggTilBilde extends AppCompatActivity {
                     final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                     imageBitmap = scaledBM(selectedImage);
                     addedImage.setImageBitmap(imageBitmap);
+                    // TODO lagre på tlf, lagre path til db.
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    //Check if any field is empty. If not, save GameObject to DB.
+    private void saveGameObject(){
+        String name = bildeNavn.getText().toString();
+        Bitmap image = imageBitmap;
+
+        if (name.trim().isEmpty() || image == null){
+            Toast.makeText(this, "Please insert a name and image", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        Picture newGameObject = new Picture(name, byteArray);
+
+        pictureViewModel.insert(newGameObject);
+
+        Intent data = new Intent();
+
+        setResult(RESULT_OK);
+        finish();
     }
 
     public Bitmap scaledBM(Bitmap bm) {
@@ -101,5 +128,6 @@ public class LeggTilBilde extends AppCompatActivity {
         bm = Bitmap.createScaledBitmap(bm, width, height, true);
         return bm;
     }
+
 
 }
