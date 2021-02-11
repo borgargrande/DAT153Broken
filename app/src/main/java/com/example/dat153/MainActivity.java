@@ -22,12 +22,9 @@ public class MainActivity extends AppCompatActivity {
         buttondataset = findViewById(R.id.buttonDataset);
         buttonspill = findViewById(R.id.buttonSpill);
 
-        buttonspill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToSpill = new Intent(MainActivity.this, GameActivity.class);
-                startActivity(goToSpill);
-            }
+        buttonspill.setOnClickListener(view -> {
+            Intent goToSpill = new Intent(MainActivity.this, GameActivity.class);
+            startActivity(goToSpill);
         });
 
         buttondataset.setOnClickListener(new View.OnClickListener() {

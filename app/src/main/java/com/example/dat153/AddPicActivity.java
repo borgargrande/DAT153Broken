@@ -1,9 +1,5 @@
 package com.example.dat153;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.dat153.Utils.Picture;
 import com.example.dat153.Utils.PictureViewModel;
 
@@ -26,14 +26,12 @@ import java.io.InputStream;
 
 public class AddPicActivity extends AppCompatActivity {
 
-
     Bitmap imageBitmap;
     ImageView addedImage;
     PictureViewModel pictureViewModel;
 
-
     private String selectedImagePath;
-    Button lagreButton;
+    Button lagreButton, buttonAdd;
     EditText bildeNavn;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -42,52 +40,64 @@ public class AddPicActivity extends AppCompatActivity {
         addedImage = findViewById(R.id.addedImage);
         lagreButton = findViewById(R.id.buttonLagre);
         bildeNavn = findViewById(R.id.nameEditText);
-       // Picture picture = new Picture("test3", "");
 
-        pictureViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(PictureViewModel.class);
+        pictureViewModel = new ViewModelProvider(this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()))
+                .get(PictureViewModel.class);
         lagreButton.setOnClickListener(view -> {
 
             saveGameObject();
 
-            });
+        });
 
 
-        findViewById(R.id.buttonfinnbilde)
-                .setOnClickListener(new View.OnClickListener() {
+        buttonAdd = findViewById(R.id.buttonfinnbilde);
 
-                    public void onClick(View arg0) {
-                        Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(openGalleryIntent, 1000);
-                    }
-                });
+        buttonAdd.setOnClickListener(view -> {
+            Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (openCameraIntent.resolveActivity(this.getPackageManager()) != null) {
+                this.startActivityForResult(openCameraIntent, 1337);
+
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if ( 1000 == requestCode) {
-            if(resultCode== Activity.RESULT_OK) {
+        if (1000 == requestCode) { //1000
+
+
+            if (resultCode == Activity.RESULT_OK) {
                 try {
                     final Uri imageUri = data.getData();
                     final InputStream imageStream = this.getContentResolver().openInputStream(imageUri);
                     final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                     imageBitmap = scaledBM(selectedImage);
                     addedImage.setImageBitmap(imageBitmap);
-                    // TODO lagre på tlf, lagre path til db.
+
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
         }
+        if (requestCode == 1337) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                imageBitmap = scaledBM(bitmap);
+                addedImage.setImageBitmap(imageBitmap);
+            }
+        }
     }
 
     //Check if any field is empty. If not, save GameObject to DB.
-    private void saveGameObject(){
+    private void saveGameObject() {
         String name = bildeNavn.getText().toString();
         Bitmap image = imageBitmap;
 
-        if (name.trim().isEmpty() || image == null){
+        if (name.trim().isEmpty() || image == null) {
             Toast.makeText(this, "Please insert a name and image", Toast.LENGTH_SHORT).show();
             return;
         }

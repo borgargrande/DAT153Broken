@@ -33,6 +33,7 @@ public class GameActivity extends AppCompatActivity {
     Button button;
     EditText svarTekst;
     TextView score, navn;
+    Picture currentPicture;
 
     PictureViewModel pictureViewModel;
 
@@ -72,6 +73,8 @@ public class GameActivity extends AppCompatActivity {
             //position = random.nextInt(max - min +1) +min;
             position = random.nextInt(max - min+1)+min;
 
+            currentPicture = allImages.get(position);
+
             byte[] imageAsBytes = allImages.get(position).getImage();
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length) ;
             imageView.setImageBitmap(bitmap);
@@ -104,6 +107,7 @@ public class GameActivity extends AppCompatActivity {
 
                         max--;
                         position = random.nextInt(max - min + 1) + min;
+                        currentPicture = allImages.get(position);
 
                         byte[] imageAsBytes = allImages.get(position).getImage();
                         Bitmap bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length) ;
@@ -127,4 +131,11 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    public Picture getCurrentPicture() {
+        return currentPicture;
+    }
+
+    public int getKorrekte() {
+        return korrekte;
+    }
 }

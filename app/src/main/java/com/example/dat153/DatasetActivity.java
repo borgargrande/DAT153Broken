@@ -19,6 +19,7 @@ import com.example.dat153.Utils.Picture;
 import com.example.dat153.Utils.PictureAdapter;
 import com.example.dat153.Utils.PictureViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DatasetActivity extends AppCompatActivity {
@@ -29,6 +30,8 @@ public class DatasetActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     PictureViewModel pictureViewModel;
     PictureAdapter pictureAdapter ;
+
+    List<Picture> allPictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,8 @@ public class DatasetActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<Picture> pictures) {
                 pictureAdapter.submitList(pictures);
+                allPictures = new ArrayList<Picture>(pictures);
+
             }
         });
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -83,6 +88,9 @@ public class DatasetActivity extends AppCompatActivity {
 
 
 
+    }
+    public int getSize() {
+        return allPictures.size();
     }
 /*
     @Override
