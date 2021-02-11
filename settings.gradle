@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "DAT153"
+rootProject.name = "DAT153v2"

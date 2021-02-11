@@ -14,6 +14,7 @@ import com.example.dat153.Utils.GameObject;
 import com.example.dat153.Utils.MyAdapter;
 import com.example.dat153.Utils.SharedObject;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jonas.dat153v2.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,25 +41,7 @@ public class Dataset extends AppCompatActivity {
             noObjectsText.setVisibility(View.INVISIBLE);
         }
 
-      /*  GameObject one = new GameObject("Bilde 1", R.drawable.ic_testimage);
-        GameObject two = new GameObject("Bilde 2", R.drawable.ic_testimage);
-        GameObject three = new GameObject("Bilde 3", R.drawable.ic_testimage);
-        GameObject four = new GameObject("Bilde 4", R.drawable.ic_testimage);
-        GameObject five = new GameObject("Bilde 5", R.drawable.ic_testimage);
 
-        allImages = new ArrayList<>();
-
-        allImages.add(one);
-        allImages.add(two);
-        allImages.add(three);
-        allImages.add(four);
-        allImages.add(five);
-
-        sharedObject.addObject(one);
-        sharedObject.addObject(two);
-        sharedObject.addObject(three);
-        sharedObject.addObject(four);
-        sharedObject.addObject(five);*/
 
        newAdapter = new MyAdapter(Dataset.this, sharedObject.getAllObjectsShared());
         r.setHasFixedSize(true);

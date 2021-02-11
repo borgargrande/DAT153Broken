@@ -19,6 +19,7 @@ import android.widget.ImageView;
 
 import com.example.dat153.Utils.GameObject;
 import com.example.dat153.Utils.SharedObject;
+import com.jonas.dat153v2.R;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

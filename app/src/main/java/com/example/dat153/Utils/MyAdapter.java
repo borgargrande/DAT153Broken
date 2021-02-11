@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.dat153.R;
+import com.jonas.dat153v2.R;
 
 import java.util.List;
 
