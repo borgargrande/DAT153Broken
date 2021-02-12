@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dat153">
+package="com.example.dat153">
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true"/>
+<application
 
-    <application
-        android:name=".SharedClasses.SharedObject"
-        android:allowBackup="true"
-        android:icon="@drawable/hvl"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/hvl"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.DAT153">
-        <activity android:name=".Activity.PlayActivity"/>
-        <activity android:name=".Activity.NewQuestionActivity" />
-        <activity android:name=".Activity.DatabaseActivity"/>
-        <activity android:name=".Activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.DAT153">
+    <activity android:name=".activities.AddImage"
+        android:parentActivityName=".activities.Dataset"></activity>
+    <activity android:name=".activities.Game" />
+    <activity android:name=".activities.Dataset"
+        android:launchMode="singleTop"/>
+    <activity android:name=".activities.MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+</application>
 
 </manifest>
