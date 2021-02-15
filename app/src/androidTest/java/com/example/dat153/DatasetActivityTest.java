@@ -49,11 +49,8 @@ public class DatasetActivityTest {
         int sizeAfter = sizeBefore;
 
         onView(withId(R.id.nameEditText)).perform(typeText("TEst input"), ViewActions.closeSoftKeyboard());
-
         onView(withId(R.id.buttonfinnbilde)).perform(click());
-
         onView(withId(R.id.buttonLagre)).perform(click());
-
         sizeAfter = mActivityTestRule.getActivity().getSize();
 
       assertThat("Size", sizeAfter, greaterThan(sizeBefore));

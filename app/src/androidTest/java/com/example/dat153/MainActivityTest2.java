@@ -19,27 +19,22 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
-
+public class MainActivityTest2 {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-
-    /*
     @Test
-    public void mainActivityTest() {
+    public void mainActivityTest2() {
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.buttonDataset), withText("Dataset"),
+                allOf(withId(R.id.buttonDataset), withText("Bilder til Quiz"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -47,12 +42,6 @@ public class MainActivityTest {
                                 0),
                         isDisplayed()));
         materialButton.perform(click());
-
-        ViewInteraction button = onView(
-                allOf(withId(R.id.buttonLeggTilBilde), withText("KAMERARULL"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
@@ -73,6 +62,4 @@ public class MainActivityTest {
             }
         };
     }
-
-     */
 }
