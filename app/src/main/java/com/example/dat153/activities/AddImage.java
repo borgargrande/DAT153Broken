@@ -23,7 +23,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.dat153.R;
 import com.example.dat153.database.GameObject;
-import com.example.dat153.utils.Formatter;
 import com.example.dat153.utils.GameObjectViewModel;
 
 import java.io.ByteArrayOutputStream;
@@ -43,7 +42,6 @@ public class AddImage extends AppCompatActivity {
     Button addImageButton;
     ImageView addedImage;
     Bitmap imageBitmap;
-    Formatter formatter = new Formatter();
     GameObjectViewModel viewModel;
 
     List<GameObject> allGameObjects;
@@ -67,13 +65,8 @@ public class AddImage extends AppCompatActivity {
 
         //On addImageButton.click() go to phone-gallery
         addImageButton.setOnClickListener(v -> {
-//            Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-//            startActivityForResult(openGalleryIntent, 1);
 
-
-
-
-            // Show camera and take a picture. Not in use
+            // Show camera and take a picture.
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
                 this.startActivityForResult(takePictureIntent, 2);
