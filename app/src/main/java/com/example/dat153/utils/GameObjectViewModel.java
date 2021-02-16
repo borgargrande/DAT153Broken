@@ -24,7 +24,6 @@ public class GameObjectViewModel extends AndroidViewModel {
 
     public void insert(GameObject gameObject) {repository.insert(gameObject);}
 
-    //public void update(GameObject gameObject) {repository.update(gameObject);}
 
     public void delete(GameObject gameObject) {repository.delete(gameObject);}
 

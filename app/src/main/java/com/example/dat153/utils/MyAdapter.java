@@ -23,7 +23,6 @@ public class MyAdapter extends ListAdapter<GameObject, MyAdapter.MyViewHolder> {
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
-        //void onItemClick(int position);
         void onDeleteClick(int position);
     }
 

@@ -1,10 +1,8 @@
 package com.example.dat153.activities;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -26,8 +24,6 @@ import com.example.dat153.database.GameObject;
 import com.example.dat153.utils.GameObjectViewModel;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +59,7 @@ public class AddImage extends AppCompatActivity {
         //Set goBackButton
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
-        //On addImageButton.click() go to phone-gallery
+        //On addImageButton.click() go to camera.
         addImageButton.setOnClickListener(v -> {
 
             // Show camera and take a picture.
@@ -75,25 +71,11 @@ public class AddImage extends AppCompatActivity {
         });
     }
 
-    //When back from gallery, handle image.
+    //When back from camera.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK) {
-                try {
 
-                    final Uri imageUri = data.getData();
-                    final InputStream imageStream = this.getContentResolver().openInputStream(imageUri);
-                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                    imageBitmap = scaledBM(selectedImage);
-                    addedImage.setImageBitmap(imageBitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-
-                }
-            }
-        }
         if (resultCode == RESULT_OK && requestCode == 2) {
             Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
             imageBitmap = scaledBM(selectedImage);
@@ -143,6 +125,7 @@ public class AddImage extends AppCompatActivity {
         }
     }
 
+    //Scaling image
     public Bitmap scaledBM(Bitmap bm) {
         int width = bm.getWidth();
         int height = bm.getHeight();
