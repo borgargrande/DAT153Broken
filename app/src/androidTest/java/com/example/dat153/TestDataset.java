@@ -51,9 +51,6 @@ public class TestDataset {
 
     @Before
     public void stubCameraIntent() {
-//        Intent resultData = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//        resultData.putExtra("image", mActivityTestRule.getActivity().scaledBM(BitmapFactory.decodeResource(mActivityTestRule.getActivity().getResources(), R.drawable.bergen3)));
-
         ActivityResult result = createImageCaptureActivityResultStub();
         intending(hasAction(MediaStore.ACTION_IMAGE_CAPTURE)).respondWith(result);
 

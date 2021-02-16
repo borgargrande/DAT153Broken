@@ -93,11 +93,7 @@ public class Dataset extends AppCompatActivity {
         }
     }
 
-/*
-    public List<GameObject> getDataset(){
-        return allGameObjects;
-    }
-*/
+
 public int getSize(){
     return allGameObjects.size();
 }

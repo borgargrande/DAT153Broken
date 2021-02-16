@@ -25,19 +25,9 @@ public class GameObjectRepository {
     }
 
     //Initialize every database-action with seperate threads
-
     public void insert(GameObject gameObject){
         Runnable runnable = () -> {
           gameObjectDao.insert(gameObject);
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
-
-    }
-
-    public void update(GameObject gameObject){
-        Runnable runnable = () -> {
-            gameObjectDao.update(gameObject);
         };
         Thread thread = new Thread(runnable);
         thread.start();
